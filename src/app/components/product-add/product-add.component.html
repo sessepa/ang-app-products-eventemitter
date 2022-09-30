@@ -1,0 +1,62 @@
+<div class="container" *ngIf="productFormGroup">
+<!--  {{productFormGroup.value|json}}-->
+  <form [formGroup]="productFormGroup" >
+    <div class="form-group">
+      <label>Name</label>
+      <input type="text" class="form-control" formControlName="name"
+              [ngClass]="{'is-invalid':submitted && productFormGroup.controls['name'].errors}">
+       <div *ngIf="submitted && productFormGroup.controls['name']?.errors" class="invalid-feedback">
+         <div *ngIf="productFormGroup.controls['name'].errors?.['required']">Name is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Price</label>
+      <input type="text" class="form-control"  formControlName="price"
+            [ngClass]="{'is-invalid':submitted && productFormGroup.controls['price'].errors}">
+       <div *ngIf="submitted && productFormGroup.controls['price']?.errors" class="invalid-feedback"></div>
+       <div *ngIf="productFormGroup.controls['price'].errors?.['required']">price is required</div>
+       <div *ngIf="productFormGroup.controls['price'].errors?.['min']">price min 10</div>
+    </div>
+    <div class="form-group">
+      <label>Quantity</label>
+      <input type="text" class="form-control"  formControlName="quantity"
+             [ngClass]="{'is-invalid':submitted && productFormGroup.controls['quantity'].errors}">
+      <div *ngIf="submitted && productFormGroup.controls['quantity']?.errors" class="invalid-feedback"></div>
+      <div *ngIf="productFormGroup.controls['quantity'].errors?.['required']">Quantity is required</div>
+      <div *ngIf="productFormGroup.controls['quantity'].errors?.['min']">quantity min 1</div>
+    </div>
+    <div class="checkbox">
+        <label>Selected</label>
+        <input type="checkbox" formControlName="selected" >
+    </div>
+    <div class="checkbox">
+      <label>Available</label>
+      <input type="checkbox" formControlName="available">
+    </div>
+    <button (click)="onSave()" class="btn btn-success" >Save</button>
+     <!-- Message de confirmation-->
+<!--    <script>-->
+<!--          $(document).ready(function()-->
+<!--          {-->
+<!--            $("BtnClose").click(function ()-->
+<!--            {-->
+<!--              $("#msgAlert").alert("close");-->
+<!--          });-->
+<!--          });-->
+<!--    </script>-->
+<!--          &lt;!&ndash;message d'alerte masquable&ndash;&gt;-->
+<!--     <div  *ngIf="submitted" class="alert-dismissible alert-success" id="msgAlert">-->
+<!--       &lt;!&ndash; croix pour masquer le message&ndash;&gt;-->
+<!--       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->
+<!--       &lt;!&ndash; le message &ndash;&gt;-->
+<!--       <p><strong>Ajout avec succès</strong></p>-->
+
+<!--       &lt;!&ndash;bouton pour masquer le message&ndash;&gt;-->
+<!--       <p><button id="BtnClose" type="button" class="btn btn-muted">Masquer ce message</button></p>-->
+
+<!--    </div>-->
+
+
+
+ </form>
+</div>

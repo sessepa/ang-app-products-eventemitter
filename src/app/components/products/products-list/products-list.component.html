@@ -1,0 +1,38 @@
+
+<div class="container">
+  <ng-container *ngIf="(productsInput$ | async) as result" [ngSwitch]="result.dataState" >
+    <!--Cas: Data encours de chargement -->
+    <ng-container *ngSwitchCase="dataStateEnum.LOADING">
+      <button class="btn btn-primary" type="button" disabled>
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Loading...
+      </button>
+    </ng-container>
+    <!--Cas: Erreur survenue lors du chargement de la data -->
+    <ng-container *ngSwitchCase="dataStateEnum.ERROR">
+      <div class="col-12 text-center"  >
+        <div class="alert alert-danger">
+          {{result.errorMessage}}
+        </div>
+      </div>
+    </ng-container>
+    <!--Cas: Data chargée -->
+    <ng-container *ngSwitchCase="dataStateEnum.LOADED">
+      <!--Affiche des produits dans une table -->
+      <table class="table">
+        <tr>
+          <th>ID</th><th>Name</th><th>Price</th><th>Quantity</th><th>Selected</th><th>Available</th><th>Selected</th><th>Delete</th><th>Edit</th>
+        </tr>
+          <app-products-item
+              [product]="p"
+              (eventEmitter)="onActionEvent($event)"
+              *ngFor="let p of result.data"
+              style="display: contents">
+
+          </app-products-item>
+      </table>
+    </ng-container>
+  </ng-container>
+
+</div>
+
